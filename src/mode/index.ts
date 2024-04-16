@@ -3,6 +3,7 @@ import {
   DrawCustomModeThis,
   MapMouseEvent,
   DrawPolygon,
+  DrawMode,
 } from '@mapbox/mapbox-gl-draw'
 import { Feature, Polygon } from 'geojson'
 
@@ -78,20 +79,20 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
   }
 
   onMouseUp(
-    this: Pick<DrawCustomModeThis, 'updateUIClasses' | 'changeMode'>,
+    this: Pick<DrawCustomModeThis, 'updateUIClasses' | 'changeMode' | 'drawConfig'>,
     state: OwnState,
     event: MapMouseEvent
   ) {
     state.endPoint = [event.lngLat.lng, event.lngLat.lat]
 
     this.updateUIClasses({ mouse: 'pointer' })
-    this.changeMode('simple_select', { featuresId: state.rectangle.id })
+    this.changeMode(this.drawConfig.defaultMode as DrawMode, { featuresId: state.rectangle.id })
   }
 
   onStop(
     this: Pick<
       DrawCustomModeThis,
-      'deleteFeature' | 'changeMode' | 'updateUIClasses' | 'getFeature' | 'map'
+      'deleteFeature' | 'changeMode' | 'updateUIClasses' | 'getFeature' | 'map' | 'drawConfig'
     >,
     state: OwnState
   ) {
@@ -113,15 +114,15 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
     }
 
     this.deleteFeature([`${state.rectangle.id}`] as any, { silent: true })
-    this.changeMode('simple_select', {}, { silent: true })
+    this.changeMode(this.drawConfig.defaultMode as DrawMode, {}, { silent: true })
   }
 
   onTrash(
-    this: Pick<DrawCustomModeThis, 'deleteFeature' | 'changeMode'>,
+    this: Pick<DrawCustomModeThis, 'deleteFeature' | 'changeMode' | 'drawConfig'>,
     state: OwnState
   ) {
     this.deleteFeature([`${state.rectangle.id}`] as any, { silent: true })
-    this.changeMode('simple_select')
+    this.changeMode(this.drawConfig.defaultMode as DrawMode)
   }
 
   toDisplayFeatures(

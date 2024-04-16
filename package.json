@@ -10,9 +10,7 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "build": "npm run build:browser && npm run build:module",
-    "build:browser": "rollup -c ./configuration/rollup.browser.js",
-    "build:module": "rollup -c ./configuration/rollup.module.js"
+    "build": "tsup ./src/index.ts"
   },
   "repository": {
     "type": "git",
