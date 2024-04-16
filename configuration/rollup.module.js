@@ -1,5 +1,5 @@
-import { terser } from 'rollup-plugin-terser';
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from 'rollup-plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
 
 export default {
   input: 'src/index.js',
@@ -7,11 +7,8 @@ export default {
   output: {
     file: 'build/mapboxgl-draw-rectangle-drag.module.js',
     format: 'esm',
-    name: 'mapboxGLDrawRectangleDrag'
+    name: 'mapboxGLDrawRectangleDrag',
   },
 
-  plugins: [
-    resolve(),
-    terser()
-  ]
-};
+  plugins: [resolve(), terser()],
+}

@@ -3,9 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ['airbnb-base'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -17,6 +15,9 @@ module.exports = {
   rules: {
     'comma-dangle': 'off',
     'no-param-reassign': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ["configuration/**/*"]}]
-  }
-};
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['configuration/**/*'] },
+    ],
+  },
+}
