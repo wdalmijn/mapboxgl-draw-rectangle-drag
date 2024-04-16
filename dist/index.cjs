@@ -1,3 +1,29 @@
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  default: () => src_default
+});
+module.exports = __toCommonJS(src_exports);
+
 // src/utils/create-rectangle.ts
 function createRectangle() {
   return {
@@ -36,7 +62,7 @@ function disableZoom(context) {
 }
 
 // src/mode/index.ts
-var DrawRectangleDrag = class {
+var DrawRectangleDrag = {
   onSetup() {
     const rectangle = this.newFeature(createRectangle());
     this.addFeature(rectangle);
@@ -49,7 +75,7 @@ var DrawRectangleDrag = class {
     });
     disableZoom(this);
     return { rectangle, startPoint: [], endPoint: [] };
-  }
+  },
   onMouseDown(state, event) {
     event.preventDefault();
     const startPoint = [event.lngLat.lng, event.lngLat.lat];
@@ -59,7 +85,7 @@ var DrawRectangleDrag = class {
       state.startPoint[0],
       state.startPoint[1]
     );
-  }
+  },
   onDrag(state, event) {
     if (!state.startPoint) {
       return;
@@ -80,12 +106,14 @@ var DrawRectangleDrag = class {
       state.startPoint[0],
       state.startPoint[1]
     );
-  }
+  },
   onMouseUp(state, event) {
     state.endPoint = [event.lngLat.lng, event.lngLat.lat];
     this.updateUIClasses({ mouse: "pointer" });
-    this.changeMode(this.drawConfig.defaultMode, { featuresId: state.rectangle.id });
-  }
+    this.changeMode(this.drawConfig.defaultMode, {
+      featuresId: state.rectangle.id
+    });
+  },
   onStop(state) {
     enableZoom(this);
     this.updateUIClasses({ mouse: "none" });
@@ -100,12 +128,16 @@ var DrawRectangleDrag = class {
       return;
     }
     this.deleteFeature([`${state.rectangle.id}`], { silent: true });
-    this.changeMode(this.drawConfig.defaultMode, {}, { silent: true });
-  }
+    this.changeMode(
+      this.drawConfig.defaultMode,
+      {},
+      { silent: true }
+    );
+  },
   onTrash(state) {
     this.deleteFeature([`${state.rectangle.id}`], { silent: true });
     this.changeMode(this.drawConfig.defaultMode);
-  }
+  },
   toDisplayFeatures(state, geojson, display) {
     const isActivePolygon = geojson?.properties?.id === state.rectangle.id;
     if (geojson?.properties?.id) {
@@ -125,6 +157,3 @@ var mode_default = DrawRectangleDrag;
 
 // src/index.ts
 var src_default = mode_default;
-export {
-  src_default as default
-};

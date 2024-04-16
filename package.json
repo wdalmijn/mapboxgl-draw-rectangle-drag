@@ -5,11 +5,12 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "browser": "dist/index.global.js",
+  "type": "module",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
+    "lint": "eslint '**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix '**/*.{ts,tsx}'",
+    "format": "prettier --check src",
+    "format:fix": "prettier --write src",
     "build": "tsup ./src/index.ts"
   },
   "repository": {
@@ -27,15 +28,15 @@
   },
   "homepage": "https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag#readme",
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@mapbox/mapbox-gl-draw": "^1.4.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/mapbox__mapbox-gl-draw": "^1.4.6",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
     "geojson": "^0.5.0",
     "prettier": "^3.2.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.0"
   }
 }

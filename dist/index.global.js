@@ -38,7 +38,7 @@
   }
 
   // src/mode/index.ts
-  var DrawRectangleDrag = class {
+  var DrawRectangleDrag = {
     onSetup() {
       const rectangle = this.newFeature(createRectangle());
       this.addFeature(rectangle);
@@ -51,7 +51,7 @@
       });
       disableZoom(this);
       return { rectangle, startPoint: [], endPoint: [] };
-    }
+    },
     onMouseDown(state, event) {
       event.preventDefault();
       const startPoint = [event.lngLat.lng, event.lngLat.lat];
@@ -61,7 +61,7 @@
         state.startPoint[0],
         state.startPoint[1]
       );
-    }
+    },
     onDrag(state, event) {
       if (!state.startPoint) {
         return;
@@ -82,12 +82,14 @@
         state.startPoint[0],
         state.startPoint[1]
       );
-    }
+    },
     onMouseUp(state, event) {
       state.endPoint = [event.lngLat.lng, event.lngLat.lat];
       this.updateUIClasses({ mouse: "pointer" });
-      this.changeMode(this.drawConfig.defaultMode, { featuresId: state.rectangle.id });
-    }
+      this.changeMode(this.drawConfig.defaultMode, {
+        featuresId: state.rectangle.id
+      });
+    },
     onStop(state) {
       enableZoom(this);
       this.updateUIClasses({ mouse: "none" });
@@ -102,12 +104,16 @@
         return;
       }
       this.deleteFeature([`${state.rectangle.id}`], { silent: true });
-      this.changeMode(this.drawConfig.defaultMode, {}, { silent: true });
-    }
+      this.changeMode(
+        this.drawConfig.defaultMode,
+        {},
+        { silent: true }
+      );
+    },
     onTrash(state) {
       this.deleteFeature([`${state.rectangle.id}`], { silent: true });
       this.changeMode(this.drawConfig.defaultMode);
-    }
+    },
     toDisplayFeatures(state, geojson, display) {
       const isActivePolygon = geojson?.properties?.id === state.rectangle.id;
       if (geojson?.properties?.id) {

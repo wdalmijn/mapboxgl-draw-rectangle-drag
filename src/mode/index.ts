@@ -1,10 +1,4 @@
-import {
-  DrawCustomMode,
-  DrawCustomModeThis,
-  MapMouseEvent,
-  DrawPolygon,
-  DrawMode,
-} from '@mapbox/mapbox-gl-draw'
+import { DrawCustomMode, DrawPolygon, DrawMode } from '@mapbox/mapbox-gl-draw'
 import { Feature, Polygon } from 'geojson'
 
 import { createRectangle, enableZoom, disableZoom } from '../utils'
@@ -15,8 +9,8 @@ interface OwnState {
   endPoint: number[]
 }
 
-class DrawRectangleDrag implements DrawCustomMode<OwnState> {
-  onSetup(this: DrawCustomModeThis) {
+const DrawRectangleDrag: DrawCustomMode<OwnState> = {
+  onSetup(this) {
     const rectangle = this.newFeature(createRectangle()) as DrawPolygon
     this.addFeature(rectangle)
 
@@ -32,9 +26,9 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
     disableZoom(this)
 
     return { rectangle, startPoint: [] as number[], endPoint: [] as number[] }
-  }
+  },
 
-  onMouseDown(state: OwnState, event: MapMouseEvent) {
+  onMouseDown(state, event) {
     event.preventDefault()
 
     const startPoint = [event.lngLat.lng, event.lngLat.lat]
@@ -46,9 +40,9 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
       state.startPoint[0],
       state.startPoint[1]
     )
-  }
+  },
 
-  onDrag(state: OwnState, event: MapMouseEvent) {
+  onDrag(state, event) {
     if (!state.startPoint) {
       return
     }
@@ -76,26 +70,18 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
       state.startPoint[0],
       state.startPoint[1]
     )
-  }
+  },
 
-  onMouseUp(
-    this: Pick<DrawCustomModeThis, 'updateUIClasses' | 'changeMode' | 'drawConfig'>,
-    state: OwnState,
-    event: MapMouseEvent
-  ) {
+  onMouseUp(state, event) {
     state.endPoint = [event.lngLat.lng, event.lngLat.lat]
 
     this.updateUIClasses({ mouse: 'pointer' })
-    this.changeMode(this.drawConfig.defaultMode as DrawMode, { featuresId: state.rectangle.id })
-  }
+    this.changeMode(this.drawConfig.defaultMode as DrawMode, {
+      featuresId: state.rectangle.id,
+    })
+  },
 
-  onStop(
-    this: Pick<
-      DrawCustomModeThis,
-      'deleteFeature' | 'changeMode' | 'updateUIClasses' | 'getFeature' | 'map' | 'drawConfig'
-    >,
-    state: OwnState
-  ) {
+  onStop(state) {
     enableZoom(this)
     this.updateUIClasses({ mouse: 'none' })
 
@@ -113,23 +99,22 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
       return
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.deleteFeature([`${state.rectangle.id}`] as any, { silent: true })
-    this.changeMode(this.drawConfig.defaultMode as DrawMode, {}, { silent: true })
-  }
+    this.changeMode(
+      this.drawConfig.defaultMode as DrawMode,
+      {},
+      { silent: true }
+    )
+  },
 
-  onTrash(
-    this: Pick<DrawCustomModeThis, 'deleteFeature' | 'changeMode' | 'drawConfig'>,
-    state: OwnState
-  ) {
+  onTrash(state) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.deleteFeature([`${state.rectangle.id}`] as any, { silent: true })
     this.changeMode(this.drawConfig.defaultMode as DrawMode)
-  }
+  },
 
-  toDisplayFeatures(
-    state: OwnState,
-    geojson: Feature<Polygon>,
-    display: Function
-  ) {
+  toDisplayFeatures(state, geojson: Feature<Polygon>, display) {
     const isActivePolygon = geojson?.properties?.id === state.rectangle.id
     if (geojson?.properties?.id) {
       geojson.properties.active = isActivePolygon.toString()
@@ -145,7 +130,7 @@ class DrawRectangleDrag implements DrawCustomMode<OwnState> {
     }
 
     display(geojson)
-  }
+  },
 }
 
 export default DrawRectangleDrag
