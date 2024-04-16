@@ -2,7 +2,11 @@
 
 A Mapbox GL Draw plugin to create a rectangle via click &amp; drag.
 
-Based on [`thegisdev/mapbox-gl-draw-rectangle-mode`](https://github.com/thegisdev/mapbox-gl-draw-rectangle-mode) plugin code.
+Based on [`thegisdev/mapbox-gl-draw-rectangle-mode`](https://github.com/thegisdev/mapbox-gl-draw-rectangle-mode) as [`CartoDB/mapboxgl-draw-rectangle-drag`](https://github.com/CartoDB/mapboxgl-draw-rectangle-drag) as plugin code.
+
+### Changelog
+
+1.1.0 - Added typescript definitions, updated logic to use default draw mode
 
 ### Demo
 
