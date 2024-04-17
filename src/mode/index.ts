@@ -5,8 +5,8 @@ import { createRectangle, enableZoom, disableZoom } from '../utils'
 
 interface OwnState {
   rectangle: DrawPolygon
-  startPoint: number[]
-  endPoint: number[]
+  startPoint?: number[]
+  endPoint?: number[]
 }
 
 const DrawRectangleDrag: DrawCustomMode<OwnState> = {
@@ -25,7 +25,7 @@ const DrawRectangleDrag: DrawCustomMode<OwnState> = {
     })
     disableZoom(this)
 
-    return { rectangle, startPoint: [] as number[], endPoint: [] as number[] }
+    return { rectangle }
   },
 
   onMouseDown(state, event) {
@@ -99,8 +99,7 @@ const DrawRectangleDrag: DrawCustomMode<OwnState> = {
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.deleteFeature([`${state.rectangle.id}`] as any, { silent: true })
+    this.deleteFeature(`${state.rectangle.id}`, { silent: true })
     this.changeMode(
       this.drawConfig.defaultMode as DrawMode,
       {},
@@ -109,8 +108,7 @@ const DrawRectangleDrag: DrawCustomMode<OwnState> = {
   },
 
   onTrash(state) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.deleteFeature([`${state.rectangle.id}`] as any, { silent: true })
+    this.deleteFeature(`${state.rectangle.id}`, { silent: true })
     this.changeMode(this.drawConfig.defaultMode as DrawMode)
   },
 
