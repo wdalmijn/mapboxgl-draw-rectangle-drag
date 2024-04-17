@@ -1,37 +1,42 @@
 {
   "name": "mapboxgl-draw-rectangle-drag",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Mapbox GL Draw plugin to create a rectangle via click & drag",
-  "main": "build/mapboxgl-draw-rectangle-drag.module.js",
-  "module": "build/mapboxgl-draw-rectangle-drag.module.js",
-  "browser": "build/mapboxgl-draw-rectangle-drag.browser.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "browser": "dist/index.global.js",
+  "type": "module",
   "scripts": {
-    "lint": "eslint .",
-    "build": "npm run build:browser && npm run build:module",
-    "build:browser": "rollup -c ./configuration/rollup.browser.js",
-    "build:module": "rollup -c ./configuration/rollup.module.js"
+    "lint": "eslint '**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix '**/*.{ts,tsx}'",
+    "format": "prettier --check src",
+    "format:fix": "prettier --write src",
+    "build": "tsup ./src/index.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CartoDB/mapboxgl-draw-rectangle-drag.git"
+    "url": "git+https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag.git"
   },
   "keywords": [
     "mapboxgl",
-    "mapboxgldraw",
-    "carto"
+    "mapboxgldraw"
   ],
-  "author": "Jesús Botella",
+  "author": "Win Dalmijn",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CartoDB/mapboxgl-draw-rectangle-drag/issues"
+    "url": "https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag/issues"
   },
-  "homepage": "https://github.com/CartoDB/mapboxgl-draw-rectangle-drag#readme",
+  "homepage": "https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag#readme",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "rollup": "^1.16.2",
-    "rollup-plugin-node-resolve": "^5.0.4",
-    "rollup-plugin-terser": "^5.0.0"
+    "@eslint/js": "^9.0.0",
+    "@mapbox/mapbox-gl-draw": "^1.4.3",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/mapbox__mapbox-gl-draw": "^1.4.6",
+    "geojson": "^0.5.0",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.0"
   }
 }

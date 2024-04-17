@@ -1,25 +1,37 @@
 # Mapbox GL Draw Rectangle Drag
+
 A Mapbox GL Draw plugin to create a rectangle via click &amp; drag.
 
-Based on [`thegisdev/mapbox-gl-draw-rectangle-mode`](https://github.com/thegisdev/mapbox-gl-draw-rectangle-mode) plugin code.
+Based on [`thegisdev/mapbox-gl-draw-rectangle-mode`](https://github.com/thegisdev/mapbox-gl-draw-rectangle-mode) as [`CartoDB/mapboxgl-draw-rectangle-drag`](https://github.com/CartoDB/mapboxgl-draw-rectangle-drag) as plugin code.
+
+### Changelog
+
+1.1.0 - Added typescript definitions, updated logic to use default draw mode
 
 ### Demo
+
 Try out this demo to see the plugin's behaviour: https://codepen.io/jesusbotella/pen/zVdxGM
 
 ## How to install
+
 You can install this plugin either using npm or JSDeliver.
 
 ### Using npm
+
 We deliver ESM compatible code through our npm module, so that you can import it in your project and compile it without issues.
+
 ```shell
 npm i mapboxgl-draw-rectangle-drag --save
 ```
+
 The module exports a default binding to the module, so you can import it like:
+
 ```js
-import mapboxGLDrawRectangleDrag from 'mapboxgl-draw-rectangle-drag';
+import mapboxGLDrawRectangleDrag from 'mapboxgl-draw-rectangle-drag'
 ```
 
 ### Using JSDeliver
+
 We have a script-compatible version of the plugin as well, ready to be imported in your HTML code using a `<script>` tag.
 
 Use this URL to get the latest version:
@@ -37,36 +49,42 @@ Or add your own version number to the URL:
 A variable named `mapboxGLDrawRectangleDrag` is defined within the global scope to be included in your Mapbox GL Draw modes.
 
 ## Usage
+
 You need to follow these steps in order to enable the control in your Draw instance.
 
 ### Add mode to Mapbox GL Draw
+
 Once the module/script is imported, you need to include the new mode within Mapbox GL's predefined modes.
 
 To do so, you need to include `modes` property in your Mapbox GL Draw configuration options.
+
 ```js
 var MapboxGLDraw = new MapboxDraw({
   modes: {
     ...MapboxDraw.modes,
-    'draw_rectangle_drag': mapboxGLDrawRectangleDrag
-  }
-});
+    draw_rectangle_drag: mapboxGLDrawRectangleDrag,
+  },
+})
 ```
 
 ### How to enable rectangle drag mode
+
 To enable the rectangle drag mode, you need to execute [`changeMode`](https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md#changemodemode-string-options-object-draw) method on your Mapbox GL Draw instance.
+
 ```js
-drawInstance.changeMode('draw_rectangle_drag');
+drawInstance.changeMode('draw_rectangle_drag')
 ```
 
 Unfortunately, custom modes cannot add custom controls to Mapbox GL Draw plugins. So, if you want to have a custom button to enable the control you need to create one by yourself. You can take some ideas from [this CodePen](https://codepen.io/roblabs/pen/zJjPzX).
 
 ### How to get your feature
+
 To do so, an event listener is needed. You need to listen to `draw.create` event on your map instance to get the definition of the feature that has just been created.
 
 ```js
 map.on('draw.create', function (event) {
-  console.log(e.features);
-});
+  console.log(e.features)
+})
 ```
 
 You can read more about it in [Draw documentation](https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md#drawcreate).
