@@ -48,7 +48,7 @@ var DrawRectangleDrag = {
       uncombineFeatures: false
     });
     disableZoom(this);
-    return { rectangle, startPoint: [], endPoint: [] };
+    return { rectangle };
   },
   onMouseDown(state, event) {
     event.preventDefault();
@@ -101,7 +101,7 @@ var DrawRectangleDrag = {
       });
       return;
     }
-    this.deleteFeature([`${state.rectangle.id}`], { silent: true });
+    this.deleteFeature(`${state.rectangle.id}`, { silent: true });
     this.changeMode(
       this.drawConfig.defaultMode,
       {},
@@ -109,7 +109,7 @@ var DrawRectangleDrag = {
     );
   },
   onTrash(state) {
-    this.deleteFeature([`${state.rectangle.id}`], { silent: true });
+    this.deleteFeature(`${state.rectangle.id}`, { silent: true });
     this.changeMode(this.drawConfig.defaultMode);
   },
   toDisplayFeatures(state, geojson, display) {
