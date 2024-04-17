@@ -1,3 +1,3 @@
-import DrawRectangleDrag from './mode';
+import DrawRectangleDrag from './mode'
 
-export default DrawRectangleDrag;
+export default DrawRectangleDrag
