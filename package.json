@@ -1,5 +1,5 @@
 {
-  "name": "@wdalmijn/mapboxgl-draw-rectangle-drag",
+  "name": "@cogna/mapboxgl-draw-rectangle-drag",
   "version": "1.1.0",
   "description": "A Mapbox GL Draw plugin to create a rectangle via click & drag",
   "main": "dist/index.cjs",
@@ -15,18 +15,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag.git"
+    "url": "git+https://github.com/cogna-co/mapboxgl-draw-rectangle-drag.git"
   },
   "keywords": [
     "mapboxgl",
     "mapboxgldraw"
   ],
-  "author": "Win Dalmijn",
+  "author": "Cogna",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag/issues"
+    "url": "https://github.com/cogna-co/mapboxgl-draw-rectangle-drag/issues"
   },
-  "homepage": "https://github.com/wdalmijn/mapboxgl-draw-rectangle-drag#readme",
+  "homepage": "https://github.com/cogna-co/mapboxgl-draw-rectangle-drag#readme",
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "@mapbox/mapbox-gl-draw": "^1.4.3",
